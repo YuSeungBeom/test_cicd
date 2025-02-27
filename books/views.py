@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.utils import timezone
 from datetime import timedelta
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
 import logging
 from django.core.cache import cache
 from django.conf import settings
@@ -64,6 +65,25 @@ def book_list(request):
         'cache_status': cache_status,
         'use_cache': use_cache
     })
+=======
+
+# Create your views here.
+
+
+def book_list(request):
+    """도서 목록 및 검색"""
+    query = request.GET.get('query', '')  # 검색어
+    if query:
+        books = Book.objects.filter(
+            models.Q(title__icontains=query) |  # 제목 검색
+            models.Q(author__icontains=query) |  # 저자 검색
+            models.Q(isbn__icontains=query)  # ISBN 검색
+        )
+    else:
+        books = Book.objects.all()  # 전체 도서 목록
+    # 도서 목록 템플릿 렌더링
+    return render(request, 'books/book_list.html', {'books': books, 'query': query})
+
 
 
 def book_detail(request, pk):
