@@ -1,0 +1,34 @@
+name: Django CI
+
+on:
+    push:
+        branches: [ main ]
+
+jobs:
+    ci:
+        runs-on: ubuntu-latest
+    
+        steps:
+        # 1
+        - name: 코드 체크아웃
+          uses: actions/checkout@v4
+
+        # 2
+        - name : .env파일 만들기
+          run: |
+            echo "DB_NAME=${{ secrets.DB_NAME }}" > .env
+            echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+            echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+            echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
+        # 3
+        - name : Docker compose 실행
+          run: docker compose up -d --build
+
+        # 4
+        - name : Django 테스트 실행
+          run: docker compose exec -T web python manage.py test
+
+        # 5
+        - name : docker 정리
+          run: docker compose down
