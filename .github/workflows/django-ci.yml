@@ -46,7 +46,7 @@ jobs:
             PRIVATE_KEY: ${{secrets.AWS_PRIVATE_KEY}}
           run: |
             mkdir -p ~/.ssh
-            echo '$PRIVATE_KEY' > ~/.ssh/aws.pem
+            echo "$PRIVATE_KEY" > ~/.ssh/aws.pem
             sed -i 's/\\n/\n/g' ~/.ssh/aws.pem  # 줄바꿈 문자 처리
             chmod 600 ~/.ssh/aws.pem  
         - name: EC2 배포
