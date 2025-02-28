@@ -1,13 +1,24 @@
-# docker-compose.yml
-
 services:
-  web:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
     volumes:
       - .:/app
-    ports:
-      - "8000:8000"
+      - static_volume:/usr/share/nginx/html/static
+      - media_volume:/usr/share/nginx/html/media
+    depends_on:
+      - web
+
+  web:
+    build: .
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --timeout 120
+    volumes:
+      - .:/app
+      - static_volume:/app/static
+      - media_volume:/app/media
+    expose:
+      - "8000"
     depends_on:
       - redis
     environment:
@@ -23,4 +34,5 @@ services:
 
 volumes:
   redis_data:
-
+  static_volume:
+  media_volume:

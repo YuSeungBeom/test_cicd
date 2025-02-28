@@ -12,12 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-<<<<<<< HEAD
 from dotenv import load_dotenv
 
 load_dotenv()
-=======
->>>>>>> 3ce823010b5099c52d106cb2bc2db2c77107ce1a
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -85,14 +82,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-<<<<<<< HEAD
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('DB_NAME'),
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT'),
-=======
+
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
         
@@ -148,7 +144,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-<<<<<<< HEAD
 
 # settings.py
 
@@ -168,5 +163,4 @@ SESSION_CACHE_ALIAS = "default"
 
 # 캐시 기본 시간 설정 (300초 = 5분)
 CACHE_TTL = 300
-=======
->>>>>>> 3ce823010b5099c52d106cb2bc2db2c77107ce1a
+

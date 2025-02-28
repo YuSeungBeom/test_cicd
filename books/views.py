@@ -8,7 +8,6 @@ from django.contrib import messages
 from django.utils import timezone
 from datetime import timedelta
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
 import logging
 from django.core.cache import cache
 from django.conf import settings
@@ -65,7 +64,7 @@ def book_list(request):
         'cache_status': cache_status,
         'use_cache': use_cache
     })
-=======
+
 
 # Create your views here.
 
